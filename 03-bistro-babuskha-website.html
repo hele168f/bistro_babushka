@@ -151,17 +151,43 @@
       }
 
      
-        footer {
-        bottom: 0;
-        width: 100%;
-        height: 5rem;
-        background-color:#323232;
-        color: white;
-        text-align: center;
-        margin-top: 10px;
-        font-family: 'Cinzel', serif;
-}
+    footer {
+            display: none;
+        }
+
     
+@media(min-width: 800px){
+    footer {
+                display: block;
+                background-color: #323232;
+                color: white;
+            }
+
+            #footer {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .kontakt {
+                margin: 0px 10px;
+                padding: 10px;
+            
+
+            }
+
+            #footer h3 {
+                text-transform: uppercase;
+            }
+
+            #footer p {
+                text-align: left;
+
+                text-align: left;
+                padding: 0;
+                margin: 5px 0 0 40px;
+
+            }
+}
      
 @media (max-width: 600px) {
    h1 {
@@ -364,5 +390,24 @@ const myHeaders = {
 </script>    
 </body>
 
-<footer> <p>Bistro Babushka</p></footer>
+<footer>
+    <div id="footer">
+        <div class="kontakt">
+            <div>
+                <h3>Kontakt:</h3>
+            </div>
+            <p>Hans knudsens plads 1A</p>
+            <p>København Ø</p>
+            <p>tlf: +21866165</p>
+        </div>
+        <div class="kontakt">
+            <div>
+                <h3>Åbningstider</h3>
+            </div>
+            <p>Mandag - Fredag: 10.30 til 22.00</p>
+            <p>Lørdag: 12.00 til 23.00</p>
+            <p>Søndag: Lukket</p>
+        </div>
+    </div>
+</footer>
 </html>
