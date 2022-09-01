@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    
+    
+    <title>Bistro Babuskha</title>
+
+    <style>
+        
+
+        img {
+            max-width: 100%;
+        } 
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            padding: 50px;
+        }
+
+        article {
+            border: 1px solid salmon;
+            border-radius: 15px;
+            margin: 5px;
+            padding: 5px;
+
+        }
+       
+        h1 {
+            font-family: 'Cinzel', serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 5rem;
+            font-size: 50px;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <h1>Bistro Babuskha</h1>
+
+    <section class="container"></section>
+
+
+    <template>
+    <article id="ret">
+
+
+        <img src="" alt="" class="billede">
+        <h3 class="navn"></h2>
+        
+        <p class="kortbeskrivelse"></p>
+        
+        <p class="pris"></p>
+       
+        
+        </article>
+    </template>
+
+
+
+
+<script>
+
+
+
+const url = "https://babushka-dd8a.restdb.io/rest/menu"
+
+const options = {
+            headers: {
+                'x-apikey': "600ec2fb1346a1524ff12de4"
+            }
+        };
+
+        async function hentData() {
+            const resspons = await fetch(url, options);
+            const json = await resspons.json();
+            vis(json);
+
+        }
+
+
+        function vis(json) {
+        console.log(json);
+        const container = document.querySelector(".container");
+        const template = document.querySelector("template");
+
+        json.forEach((ret) => {
+            const klon = template.cloneNode(true).content;
+            klon.querySelector(".billede").src = "billeder/" + ret.billede;
+            klon.querySelector(".navn").textContent = ret.navn;
+            klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
+            klon.querySelector(".pris").textContent = ret.pris;
+            container.appendChild(klon);
+
+        });
+
+    }
+
+        hentData();
+
+
+</script>    
+</body>
+</html>

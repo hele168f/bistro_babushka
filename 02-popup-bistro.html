@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <title>Bistro Babuskha</title>
+
+    <style>
+        
+        body {
+            background-color: ivory;
+        }
+
+        img {
+            max-width: 100%;
+        } 
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            padding: 50px;
+        }
+
+        article {
+            border: 1px solid brown;
+            border-radius: 15px;
+            margin: 5px;
+            padding: 5px;
+
+        }
+       
+        h1 {
+            font-family: 'Cinzel', serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 5rem;
+            font-size: 50px;
+            /* background-color: indianred; */
+        }
+
+        #menu {
+           display: flex;
+           justify-content:center;
+           margin-top: 40px;
+           gap: 10px;
+           color: white;
+           
+           
+        }
+
+
+        button {
+            border: 0;
+            background-color:lightgray rgba(red, green, blue, alpha); 
+            font-family:'PT serif', serif, kursiv ;; 
+        }
+
+        .valgt {
+            background-color:indianred;
+            
+
+        }
+
+        h2 {
+            padding-left: 5rem;
+            margin-top: 5rem;
+            font-family: 'PT serif', serif, kursiv ;
+        }
+
+
+      
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to right,rgba(155, 145, 142, 0.233)  ,peru);
+            /* overflow: scroll; */
+            display: none;
+            
+          
+           
+        }
+
+        #popup article {
+            width: 50vw;
+            display: flex;
+            flex-direction: column;
+            
+            /* border-radius: 25px; */
+            background-color: ivory;
+            padding: 3rem;
+            border-color: solid black;
+           
+            
+            
+            
+        }
+
+        #popup article h3 p { 
+            top: 0;
+        
+            
+        }
+
+
+    #luk {
+        position: fixed;
+        padding: 1em;
+        font-size: 1.7em;
+        font-weight: bolder;
+        color: black;
+        cursor: pointer;
+      }
+
+      #top {
+    /* position: sticky; */
+    top: 0;
+    height: 10rem;
+    margin-top: -3rem;
+    background-color: indianred;
+         
+
+      }
+ 
+      #bistrobabushka p {
+      color: black;
+      margin-top: 4rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      padding-left: 1rem;
+      font-size: 30px;
+         
+
+      }
+
+     
+        footer {
+        bottom: 0;
+        width: 100%;
+        height: 5rem;
+        background-color:indianred;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        font-family: 'Cinzel', serif;
+}
+    
+     
+@media (max-width: 600px) {
+   h1 {
+    font-size: 30px;
+  }
+  h2 {
+      font-size: 15px;
+      padding-left: 2rem;
+  }
+}
+
+
+     
+
+    </style>
+
+</head>
+
+
+<header>
+
+   <div id="top">   </div>
+   
+  <h1>Bistro Babushka</h1>
+   
+
+    <nav id="menu">
+
+        <button data-kategori="alle" class="valgt">Alle</button>
+        <button data-kategori="sideorders">Forretter</button>
+        <button data-kategori="hovedretter">Hovedretter</button>
+        <button data-kategori="desserter">Desserter</button>
+        <button data-kategori="drikkevarer">Drikkevarer</button>
+        
+        </nav>
+
+  
+
+        <h2>Alle</h2>
+</header>
+
+<body>
+
+    
+
+    <section id="popup">
+        <div id="luk">&#x2715</div>
+        <article>
+        
+        <h2></h2>
+      
+        <h3>Navn: <span class="navn"></span> </h3>
+        <p> <b> Oprindelse: </b>   <span class="oprindelsesregion"></span>  </p>
+        <p> <b>Beskrivelse: </b>  <span class="beskrivelse"></span>  </p>
+        <p> <b>Pris:</b> <span class="pris"></span> kr    </p>
+        <img src="" alt="">
+        
+        
+        </article>
+        
+        </section>
+
+
+
+
+   
+
+    <section class="container"></section>
+
+
+    <template>
+    <article id="ret">
+
+
+       <img src="" alt="" class="img">
+        <h3 class="navn"></h2>
+        
+        <p class="kortbeskrivelse"></p>
+        
+        <p class="pris"></p>
+       
+        
+        </article>
+    </template>
+
+
+
+
+<script>
+
+
+const header = document.querySelector("header h2");
+const url = "https://babushka-dd8a.restdb.io/rest/menu"
+const myHeaders = {
+         "x-apikey": "600ec2fb1346a1524ff12de4"
+            }
+    
+
+      document.addEventListener("DOMContentLoaded", start)
+      let retter;
+      let filter ="alle";
+      function start() {
+            const filterknapper = document.querySelectorAll("nav button");
+            filterknapper.forEach(knap => knap.addEventListener("click", filtrerRetter));
+
+          loadJSON();
+      }
+
+      function filtrerRetter () {
+          filter = this.dataset.kategori;
+          document.querySelector(".valgt").classList.remove("valgt");
+          this.classList.add("valgt")
+
+     visRetter();
+     header.textContent = this.textContent;
+
+      }
+
+
+        async function loadJSON() {
+            const JSONData = await fetch("https://babushka-dd8a.restdb.io/rest/menu", {
+                headers: myHeaders
+            });
+           retter = await JSONData.json();
+           console.log("Retter", retter);
+           visRetter();
+
+        }
+
+
+        function visRetter(){
+        
+        const container = document.querySelector(".container");
+        const template = document.querySelector("template");
+        container.textContent ="";
+        retter.forEach(ret => {
+        if(filter == ret.kategori || filter =="alle" ) { 
+            const klon = template.cloneNode(true).content;
+            const md = "-md.jpg"; 
+            klon.querySelector("img").src = "billeder/" + ret.billednavn + md;
+            klon.querySelector(".navn").textContent = ret.navn;
+            klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
+            klon.querySelector(".pris").textContent = ret.pris;
+            klon.querySelector("article").addEventListener("click", () => visDetaljer(ret));
+            container.appendChild(klon);
+
+        }
+
+
+    })
+}
+
+        function visDetaljer(ret) {
+            console.log(ret);
+        }
+
+     
+
+
+        function visDetaljer(ret) {
+            console.log(ret);
+            popup.style.display = "block";
+          
+            popup.querySelector("h3").textContent = ret.navn;
+            popup.querySelector(".oprindelsesregion").textContent = ret.oprindelsesregion;
+            popup.querySelector(".beskrivelse").textContent = ret.langbeskrivelse;
+            popup.querySelector(".pris").textContent = ret.pris;
+            popup.querySelector("img").src = "billeder/" + ret.billednavn + md;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+       document
+        .querySelector("#luk")
+        .addEventListener("click", () => (popup.style.display = "none"));
+
+
+</script>    
+</body>
+
+<footer> <p>Bistro Babushka</p></footer>
+</html>
