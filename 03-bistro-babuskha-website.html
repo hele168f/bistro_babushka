@@ -91,14 +91,14 @@
 
       
         #popup {
-            position: fixed;
+            position: fixed; /*den står hvor den skal*/
             top: 100px;
             left: 250px;
-            width: 50vw;
-            height: 50vh;
+            width: 100%; /* fulde længde
+            height: 100%; /* Fulde højde */
             /* overflow: scroll; */
-            display: none;
-            z-index: 1;
+            display: none; /* gemt by default */
+            z-index: 1; /* ligger øverst på siden*/
             
           
            
@@ -246,30 +246,22 @@ width: 20vw;
 
     
 
-    <section id="popup">
-        <div id="luk">&#x2715</div>
+    <section id="popup"> <!-- popop er ikke et template, det er blot et almindeligt HTML-element der kan skjules og vises via css og JS-->
+        <div id="luk">&#x2715</div><!--Vi skal have en luk knap til popop-->
         <article>
         
         <h2></h2>
       
-        <h3>Navn: <span class="navn"></span> </h3>
-        <p> <b> Oprindelse: </b>   <span class="oprindelsesregion"></span>  </p>
-        <p> <b>Beskrivelse: </b>  <span class="beskrivelse"></span>  </p>
-        <p> <b>Pris:</b> <span class="pris"></span> kr    </p>
+        <h3>Navn: <span class="navn"></span> </h3> <!--Elementer til detaljerne-->
+        <p> <b> Oprindelse: </b>   <span class="oprindelsesregion"></span>  </p> <!--Elementer til detaljerne-->
+        <p> <b>Beskrivelse: </b>  <span class="beskrivelse"></span>  </p> <!--Elementer til detaljerne-->
+        <p> <b>Pris:</b> <span class="pris"></span> kr    </p> <!--Elementer til detaljerne-->
         <img src="" alt="">
         
         
         </article>
         
-        </section>
-
-
-
-
-   
-
-    <section class="container"></section>
-
+        </section><section class="container"></section>
 
     <template>
     <article id="ret">
@@ -335,7 +327,7 @@ const myHeaders = {
         
         const container = document.querySelector(".container");
         const template = document.querySelector("template");
-        container.textContent ="";
+        container.textContent =""; //textContent lig med en tom streng, gør vi ryder container inden ny loop.
         retter.forEach(ret => {
         if(filter == ret.kategori || filter =="alle" ) { 
             const klon = template.cloneNode(true).content;
@@ -344,7 +336,8 @@ const myHeaders = {
             klon.querySelector(".navn").textContent = ret.navn;
             klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
             klon.querySelector(".pris").textContent = ret.pris;
-            klon.querySelector("article").addEventListener("click", () => visDetaljer(ret));
+            klon.querySelector("article").addEventListener("click", () => visDetaljer(ret)); //i hver iteration tilføjes den nye article-element en click-eventListener. Når forEach er færdig, er alle artikler blevet kilkbare.
+            //Med en anonym funktion kan vi medsende en parameter(en ret) der indeholder al relevant data til at vise i popup'en. 
             container.appendChild(klon);
 
         }
@@ -357,9 +350,6 @@ const myHeaders = {
             console.log(ret);
         }
 
-     
-
-
         function visDetaljer(ret) {
             console.log(ret);
             popup.style.display = "block";
@@ -371,20 +361,9 @@ const myHeaders = {
             popup.querySelector("img").src = "billeder/" + ret.billednavn + md;
         }
 
+        //Laver en eventListener til knappen: når den klikkes, skal popup-vinduet lukkes
+       document.querySelector("#luk").addEventListener("click", () => (popup.style.display = "none"));
 
-
-
-
-
-
-
-
-
-
-
-       document
-        .querySelector("#luk")
-        .addEventListener("click", () => (popup.style.display = "none"));
 
 
 </script>    
